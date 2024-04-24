@@ -30,7 +30,10 @@
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous"></script>
     <script>
         // Connect to the socket server on AWS
-        const socket = io('wss://2b23-3-25-93-178.ngrok-free.app', { path: '/click-game-socket-endpoint' });
+        const socket = io('https://2b23-3-25-93-178.ngrok-free.app', { 
+            path: '/click-game-socket-endpoint',
+            transports: ['websocket']
+        });
 
         // Display element
         const numberDisplay = document.getElementById('numberDisplay');
