@@ -53,6 +53,10 @@
         socket.on('connect', () => {
             console.log('Connected to the server.');
         });
+        
+        socket.on('echo', (message) => {
+            console.log('Echo from server:', message);
+        });
 
         // Handle disconnection
         socket.on('disconnect', (reason) => {
