@@ -27,6 +27,9 @@
     <button id="decrementButton">Decrement</button>
     <button id="incrementButton">Increment</button>
 
+    <!-- Eruda is console for mobile browsers -->
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -75,8 +78,5 @@
             console.log('Error:', error);
         });
     </script>
-    <!-- Eruda is console for mobile browsers -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
 </body>
 </html>
