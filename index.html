@@ -27,7 +27,7 @@
     <button id="incrementButton">Increment</button>
     <button id="decrementButton">Decrement</button>
 
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-ROfFvLp2sDywm6hYlp6xe2KDdHlOt6hzt20GY2UaauUR3q+djvWGBkyjq1yuyd+F" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous"></script>
     <script>
         // Connect to the socket server on AWS
         const socket = io('http://3.25.93.178:3000', { path: '/click-game-socket-endpoint' });
@@ -45,7 +45,7 @@
         });
 
         // Handle incoming messages
-        socket.on('number update', (newNumber) => {
+        socket.on('num-update', (newNumber) => {
             numberDisplay.textContent = newNumber;
         });
 
