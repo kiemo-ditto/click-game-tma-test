@@ -15,8 +15,8 @@
         socket.on('connect', function() {
             console.log('Connected!');
         });
-        socket.on('connect_error', function(err) {
-            console.error(`Connection failed: ${err}`);
+        socket.on('error', (error) => {
+            console.error('Error connecting:', error);
         });
     </script>
 </body>
