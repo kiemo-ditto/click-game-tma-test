@@ -11,7 +11,7 @@
         console.log(`Attempting websocket connection`);
         var socket = io('https://2b23-3-25-93-178.ngrok-free.app', {
             path: '/click-game-socket-endpoint',
-            transports: ['polling', 'websocket']
+            transports: ['websocket', 'polling']
         });
         socket.on('connect', function() {
             console.log('Connected!');
