@@ -17,6 +17,9 @@
         });
         socket.on('error', (error) => {
             console.error('Error connecting:', error);
+                if (error.description) {
+                    console.error('Detailed error:', JSON.stringify(error.description, null, 2));
+                }
         });
     </script>
 </body>
