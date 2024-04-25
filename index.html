@@ -16,7 +16,7 @@
             console.log('Connected!');
         });
         socket.on('connect_error', function(error) {
-            console.log('Connection failed:', error);
+            console.error('Connection failed:', JSON.stringify(error, null, 2));
         });
     </script>
 </body>
