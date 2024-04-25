@@ -15,8 +15,8 @@
         socket.on('connect', function() {
             console.log('Connected!');
         });
-        socket.on('error', (error) => {
-            console.error('Error connecting:', error);
+        socket.on('connect_error', (error) => {
+            console.error('Connection failed:', JSON.stringify(error, null, 2));
             if (error.description) {
                 console.error('Detailed error:', JSON.stringify(error.description, null, 2));
             }
