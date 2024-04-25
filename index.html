@@ -1,81 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        #numberDisplay {
-            font-size: 48px;
-            margin: 20px;
-        }
-        button {
-            font-size: 16px;
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Simple Socket Test</title>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
 </head>
 <body>
-    <div id="numberDisplay">0</div>
-    <button id="decrementButton">Decrement</button>
-    <button id="incrementButton">Increment</button>
-
-    <!-- Eruda is console for mobile browsers -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" crossorigin="anonymous"></script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        // Connect to the socket server on AWS
-        const socket = io('https://2b23-3-25-93-178.ngrok-free.app', { 
-            path: '/click-game-socket-endpoint',
-            transports: ['websocket', 'polling']
+        var socket = io('https://your-server-url', {
+            path: '/socket.io',
+            transports: ['websocket', 'polling']  // Test with both transports
         });
-
-        // Display element
-        const numberDisplay = document.getElementById('numberDisplay');
-
-        // Set up event listeners for buttons
-        document.getElementById('incrementButton').addEventListener('click', () => {
-            socket.emit('increment');
+        socket.on('connect', function() {
+            console.log('Connected!');
         });
-
-        document.getElementById('decrementButton').addEventListener('click', () => {
-            socket.emit('decrement');
-        });
-
-        // Handle incoming messages
-        socket.on('num-update', (newNumber) => {
-            numberDisplay.textContent = newNumber;
-        });
-
-        // Handle initial connection or any reconnections
-        socket.on('connect', () => {
-            console.log('Connected to the server.');
-        });
-        
-        socket.on('echo', (message) => {
-            console.log('Echo from server:', message);
-        });
-
-        // Handle disconnection
-        socket.on('disconnect', (reason) => {
-            if (reason === 'io server disconnect') {
-                console.log('Disconnected from server - server side disconnect');
-            } else {
-                console.log('Disconnected from server, reason:', reason);
-            }
-        });
-            
-        socket.on('error', function(error) {
-            console.log('Error:', error);
+        socket.on('connect_error', function(error) {
+            console.log('Connection failed:', error);
         });
     </script>
 </body>
