@@ -35,6 +35,11 @@
     <button id="decrementButton">Decrement</button>
     <button id="incrementButton">Increment</button>
 
+    <div id="countdown-container">
+        <span id="countdown-minutes">00</span>:
+        <span id="countdown-seconds">00</span>
+    </div>
+
     <!-- Eruda is console for mobile browsers -->
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
@@ -56,6 +61,42 @@
 
         document.getElementById('decrementButton').addEventListener('click', () => {
             socket.emit('decrement');
+        });
+
+        function updateCountdownDisplay(countdownData) {
+            const { start, end, state } = countdownData;
+            const now = Date.now();
+
+            let remainingTime = end - now; 
+            let minutes;
+            let seconds;
+            if (remainingTime <= 0) {
+                minutes = 0;
+                seconds = 0;
+            } else {
+                minutes = Math.floor(remainingTime / (1000 * 60));
+                seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+            }
+                
+            const minutesDisplay = document.getElementById('countdown-minutes');
+            const secondsDisplay = document.getElementById('countdown-seconds');
+
+            minutesDisplay.textContent = String(minutes).padStart(2, '0');
+            secondsDisplay.textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Initial data received
+        let countdownData = { start: 0, end: 0, state: '' }; 
+
+        // Start updating the display
+        let intervalId = setInterval(updateCountdownDisplay, 1000, countdownData); 
+
+        // Socket.IO Listener (If updates come from the server)
+        socket.on('countdown-update', (newData) => {
+            countdownData.start = parseInt(newData.start);
+            countdownData.end = parse(newData.end);
+            countdownData.state = newData.state;
+            updateCountdownDisplay(newData);
         });
 
         // Handle incoming messages
