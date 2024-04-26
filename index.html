@@ -94,7 +94,7 @@
         // Socket.IO Listener (If updates come from the server)
         socket.on('countdown-update', (newData) => {
             countdownData.start = parseInt(newData.start);
-            countdownData.end = parse(newData.end);
+            countdownData.end = parseInt(newData.end);
             countdownData.state = newData.state;
             updateCountdownDisplay(newData);
         });
