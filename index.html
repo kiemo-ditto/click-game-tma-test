@@ -105,7 +105,7 @@
 
         // Handle incoming messages
         socket.on('count-update', (newNumber) => {
-            console.log(`count: ${count}`);
+            console.log(`count: ${newNumber}`);
             numberDisplay.textContent = newNumber;
         });
 
