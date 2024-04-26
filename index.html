@@ -36,9 +36,11 @@
     <button id="incrementButton">Increment</button>
 
     <div id="countdown-container">
+        <div id="betting-status"></div> 
         <span id="countdown-minutes">00</span>:
         <span id="countdown-seconds">00</span>
     </div>
+    
 
     <!-- Eruda is console for mobile browsers -->
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
@@ -83,6 +85,10 @@
 
             minutesDisplay.textContent = String(minutes).padStart(2, '0');
             secondsDisplay.textContent = String(seconds).padStart(2, '0');
+
+            // Update betting status
+            const bettingStatusDisplay = document.getElementById('betting-status');
+            bettingStatusDisplay.textContent = countdownData.state === 'open' ? 'Betting Open' : 'Betting Closed';
         }
 
         // Initial data received
@@ -105,7 +111,6 @@
 
         // Handle incoming messages
         socket.on('count-update', (newNumber) => {
-            console.log(`count: ${newNumber}`);
             numberDisplay.textContent = newNumber;
         });
 
