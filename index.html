@@ -93,6 +93,7 @@
 
         // Socket.IO Listener (If updates come from the server)
         socket.on('countdown-update', (newData) => {
+            console.log(newData)
             countdownData.start = newData.start;
             countdownData.end = newData.end;
             countdownData.state = newData.state;
@@ -104,6 +105,7 @@
 
         // Handle incoming messages
         socket.on('count-update', (newNumber) => {
+            console.log(`count: ${count}`);
             numberDisplay.textContent = newNumber;
         });
 
